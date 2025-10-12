@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peringatan Keamanan</title>
+    <title>Web Unband Wangsap by xyzz</title>
     <style>
         * {
             margin: 0;
@@ -13,363 +13,386 @@
         }
         
         body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #fff;
+            background: linear-gradient(135deg, #2c3e50 0%, #4a235a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
-        }
-        
-        .warning-container {
-            background: #0f3460;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            max-width: 800px;
-            width: 100%;
+            position: relative;
             overflow: hidden;
-            border: 2px solid #e94560;
         }
         
-        .warning-header {
-            background: #e94560;
-            padding: 20px;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
+        /* Efek hujan */
+        .rain {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -2;
         }
         
-        .warning-icon {
-            font-size: 2.5rem;
-            animation: pulse 2s infinite;
+        .rain-drop {
+            position: absolute;
+            width: 2px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 2px;
+            animation: rain-fall linear infinite;
         }
         
-        .warning-title {
-            font-size: 1.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        @keyframes rain-fall {
+            0% {
+                transform: translateY(-50px);
+            }
+            100% {
+                transform: translateY(calc(100vh + 50px));
+            }
         }
         
-        .warning-content {
+        /* Karakter anime sedih */
+        .sad-character {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            bottom: 20px;
+            right: 20px;
+            z-index: -1;
+        }
+        
+        .sad-character::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="35" r="20" fill="%23FFC0CB"/><path d="M30,65 Q50,85 70,65 L70,95 Q50,105 30,95 Z" fill="%23FFC0CB"/><circle cx="40" cy="30" r="5" fill="white"/><circle cx="60" cy="30" r="5" fill="white"/><circle cx="40" cy="30" r="2" fill="black"/><circle cx="60" cy="30" r="2" fill="black"/><path d="M45,45 Q50,40 55,45" stroke="black" fill="none" stroke-width="2"/><path d="M40,60 Q50,70 60,60" stroke="black" fill="none" stroke-width="2" stroke-linecap="round"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
+        /* Awan sedih */
+        .cloud {
+            position: absolute;
+            background: rgba(100, 100, 100, 0.3);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 20px 8px rgba(100, 100, 100, 0.3),
+                20px 0 20px 8px rgba(100, 100, 100, 0.3),
+                -20px 0 20px 8px rgba(100, 100, 100, 0.3);
+            animation: float 20s infinite linear;
+            z-index: -1;
+        }
+        
+        .cloud-1 {
+            width: 120px;
+            height: 40px;
+            top: 10%;
+            left: 5%;
+        }
+        
+        .cloud-2 {
+            width: 180px;
+            height: 60px;
+            top: 15%;
+            right: 5%;
+            animation-delay: -5s;
+        }
+        
+        .cloud-3 {
+            width: 150px;
+            height: 50px;
+            bottom: 20%;
+            left: 10%;
+            animation-delay: -10s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateX(-20px);
+            }
+            50% {
+                transform: translateX(20px);
+            }
+            100% {
+                transform: translateX(-20px);
+            }
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 1;
         }
         
-        .alert-message {
-            background: rgba(233, 69, 96, 0.2);
-            border-left: 5px solid #e94560;
-            padding: 15px;
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 26px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .byline {
+            color: #3498db;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        h2 {
+            color: #2980b9;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #3498db, #2980b9);
+            border-radius: 3px;
+        }
+        
+        .form-group {
             margin-bottom: 20px;
-            border-radius: 0 5px 5px 0;
         }
         
-        .countdown {
-            background: #1a1a2e;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            margin: 25px 0;
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
         }
         
-        .countdown-timer {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #ff0000;
-            margin: 10px 0;
-        }
-        
-        .files-list {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 15px;
-            margin: 20px 0;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        
-        .file-item {
-            padding: 8px 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .file-item:last-child {
-            border-bottom: none;
-        }
-        
-        .file-icon {
-            color: #e94560;
-        }
-        
-        .payment-info {
-            background: rgba(15, 52, 96, 0.8);
-            border: 1px dashed #e94560;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        
-        .dana-number {
-            background: #1a1a2e;
+        input, select {
+            width: 100%;
             padding: 12px;
-            border-radius: 5px;
-            font-family: monospace;
-            text-align: center;
-            margin: 10px 0;
-            word-break: break-all;
-            color: #e94560;
-            font-size: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background-color: rgba(255, 255, 255, 0.8);
         }
         
-        .whatsapp-number {
-            background: #1a1a2e;
-            padding: 12px;
-            border-radius: 5px;
-            font-family: monospace;
-            text-align: center;
-            margin: 10px 0;
-            word-break: break-all;
-            color: #25D366;
-            font-size: 1.2rem;
+        input:focus, select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
         }
         
-        .warning-footer {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            gap: 15px;
-        }
-        
-        .btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            flex: 1;
-            text-align: center;
-        }
-        
-        .btn-pay {
-            background: #e94560;
+        .submit-btn {
+            background: linear-gradient(to right, #3498db, #2980b9);
             color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            position: relative;
+            overflow: hidden;
         }
         
-        .btn-pay:hover {
-            background: #c23a52;
+        .submit-btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
         }
         
-        .btn-contact {
-            background: transparent;
-            border: 1px solid #25D366;
-            color: #25D366;
+        .submit-btn:active {
+            transform: translateY(0);
         }
         
-        .btn-contact:hover {
-            background: rgba(37, 211, 102, 0.1);
-        }
-        
-        .disclaimer {
-            margin-top: 30px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            font-size: 0.9rem;
+        .info-text {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
             text-align: center;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        .blink {
-            animation: blink 1s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0.3; }
-        }
-        
-        .urgent-note {
-            background: rgba(255, 0, 0, 0.2);
-            border: 1px solid #ff0000;
-            border-radius: 5px;
+            line-height: 1.5;
+            background-color: rgba(52, 152, 219, 0.1);
             padding: 10px;
-            margin: 10px 0;
-            text-align: center;
-            font-weight: bold;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
         }
         
-        .dana-icon {
-            font-size: 2rem;
-            margin-right: 10px;
+        .error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
         }
         
-        .whatsapp-icon {
-            font-size: 2rem;
-            margin-right: 10px;
+        .tear-drop {
+            position: absolute;
+            width: 5px;
+            height: 10px;
+            background: rgba(52, 152, 219, 0.6);
+            border-radius: 0 0 5px 5px;
+            animation: tear-fall 3s infinite;
+            z-index: -1;
         }
         
-        .payment-method {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
+        .tear-1 {
+            top: 10%;
+            left: 15%;
+            animation-delay: 0s;
         }
         
-        .contact-section {
-            background: rgba(15, 52, 96, 0.8);
-            border: 1px dashed #25D366;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
+        .tear-2 {
+            top: 20%;
+            right: 20%;
+            animation-delay: 1s;
         }
         
-        @media (max-width: 600px) {
-            .warning-footer {
-                flex-direction: column;
+        .tear-3 {
+            top: 15%;
+            left: 30%;
+            animation-delay: 2s;
+        }
+        
+        @keyframes tear-fall {
+            0% {
+                transform: translateY(-20px) scale(0.8);
+                opacity: 0;
             }
-            
-            .countdown-timer {
-                font-size: 2rem;
+            10% {
+                opacity: 1;
             }
-            
-            .warning-title {
-                font-size: 1.5rem;
+            100% {
+                transform: translateY(100vh) scale(1.2);
+                opacity: 0;
             }
         }
     </style>
 </head>
 <body>
-    <div class="warning-container">
-        <div class="warning-header">
-            <div class="warning-icon">⚠</div>
-            <h1 class="warning-title">PERINGATAN RANSOMWARE</h1>
+    <div class="rain" id="rain"></div>
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+    <div class="sad-character"></div>
+    <div class="tear-drop tear-1"></div>
+    <div class="tear-drop tear-2"></div>
+    <div class="tear-drop tear-3"></div>
+    
+    <div class="container">
+        <h1>Web Unband Wangsap</h1>
+        <p class="byline">by xyzz</p>
+        <h2>Unban WhatsApp</h2>
+        
+        <div class="form-group">
+            <label for="phone">Nomor WhatsApp yang diblokir</label>
+            <input type="text" id="phone" placeholder="+62xxxxxxxxxxx">
+            <div class="error" id="phoneError">Harap masukkan nomor WhatsApp</div>
         </div>
         
-        <div class="warning-content">
-            <div class="alert-message">
-                <h2>File Anda Telah Dienkripsi!</h2>
-                <p>Semua file pribadi Anda seperti dokumen, foto, database, dan file lainnya telah dienkripsi dengan algoritma enkripsi yang kuat.</p>
-            </div>
-            
-            <p>Untuk mengembalikan file Anda, Anda harus membayar tebusan melalui Dana. Jika pembayaran tidak dilakukan dalam waktu yang ditentukan, semua file Anda akan dihapus secara permanen.</p>
-            
-            <div class="urgent-note">
-                ⚠ PERINGATAN: Waktu pembayaran sangat terbatas! Hanya 25 menit!
-            </div>
-            
-            <div class="countdown">
-                <p>Waktu tersisa untuk membayar:</p>
-                <div class="countdown-timer blink">25:00</div>
-                <p>Setelah waktu habis, semua file akan dihapus secara permanen!</p>
-            </div>
-            
-            <div class="files-list">
-                <h3>File yang Terkena Dampak:</h3>
-                <div class="file-item">
-                    <span class="file-icon">📷</span>
-                    <span>Foto_Keluarga.jpg</span>
-                </div>
-                <div class="file-item">
-                    <span class="file-icon">📄</span>
-                    <span>Dokumen_Penting.pdf</span>
-                </div>
-                <div class="file-item">
-                    <span class="file-icon">💼</span>
-                    <span>Laporan_Keuangan.xlsx</span>
-                </div>
-                <div class="file-item">
-                    <span class="file-icon">🎬</span>
-                    <span>Video_Keluarga.mp4</span>
-                </div>
-                <div class="file-item">
-                    <span class="file-icon">📝</span>
-                    <span>Tugas_Kuliah.docx</span>
-                </div>
-                <div class="file-item">
-                    <span class="file-icon">🔒</span>
-                    <span>Dan 1.247 file lainnya...</span>
-                </div>
-            </div>
-            
-            <div class="payment-info">
-                <div class="payment-method">
-                    <span class="dana-icon">💳</span>
-                    <h3>Instruksi Pembayaran Dana:</h3>
-                </div>
-                <p>Untuk mendekripsi file Anda, kirim <strong>Rp 500.000</strong> ke nomor Dana berikut:</p>
-                <div class="dana-number">08816615715</div>
-                <p>Setelah pembayaran dikonfirmasi, Anda akan menerima kunci dekripsi untuk memulihkan file Anda.</p>
-            </div>
-            
-            <div class="contact-section">
-                <div class="payment-method">
-                    <span class="whatsapp-icon">💬</span>
-                    <h3>Hubungi Kami Melalui WhatsApp:</h3>
-                </div>
-                <p>Jika Anda memiliki pertanyaan atau sudah melakukan pembayaran, hubungi kami melalui WhatsApp di nomor berikut:</p>
-                <div class="whatsapp-number">6283862722713</div>
-                <p>Kirim bukti transfer setelah pembayaran untuk mendapatkan kunci dekripsi.</p>
-            </div>
-            
-            <div class="warning-footer">
-                <button class="btn btn-pay" onclick="showPaymentInstructions()">Bayar Tebusan</button>
-                <button class="btn btn-contact" onclick="redirectToWhatsApp()">Hubungi Kami</button>
-            </div>
-            
-            <div class="disclaimer">
-                <p><strong>PENTING:</strong> Ini hanyalah simulasi untuk tujuan edukasi. Jangan pernah membayar tebusan ransomware sungguhan. Selalu backup data penting Anda dan gunakan perangkat lunak keamanan yang terpercaya.</p>
-            </div>
+        <div class="form-group">
+            <label for="reason">Pilih Opsi Band</label>
+            <select id="reason">
+                <option value="" disabled selected>– Pilih alasan –</option>
+                <option value="spam">Spam</option>
+                <option value="permanent">Permanent</option>
+            </select>
+            <div class="error" id="reasonError">Harap pilih alasan banding</div>
         </div>
+        
+        <button class="submit-btn" id="submitBtn">KIRIM BANDING</button>
+        
+        <p class="info-text">
+            Saat tombol ditekan: sistem akan mencoba membuka aplikasi Gmail (Android). 
+            Silahkan kirim pesannya lalu tunggu balasan WhatsApp.
+        </p>
     </div>
 
     <script>
-        // Timer countdown 25 menit (hanya simulasi)
-        function updateCountdown() {
-            const timerElement = document.querySelector('.countdown-timer');
-            let time = 25 * 60; // 25 menit dalam detik
+        // Membuat efek hujan
+        const rainContainer = document.getElementById('rain');
+        for (let i = 0; i < 80; i++) {
+            const drop = document.createElement('div');
+            drop.classList.add('rain-drop');
+            drop.style.left = `${Math.random() * 100}%`;
+            drop.style.animationDuration = `${Math.random() * 1 + 0.5}s`;
+            drop.style.animationDelay = `${Math.random() * 2}s`;
+            rainContainer.appendChild(drop);
+        }
+
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const phone = document.getElementById('phone').value.trim();
+            const reason = document.getElementById('reason').value;
+            let isValid = true;
             
-            setInterval(() => {
-                if (time <= 0) return;
-                
-                time--;
-                
-                const minutes = Math.floor(time / 60);
-                const seconds = time % 60;
-                
-                timerElement.textContent = 
-                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                    
-                // Ubah warna menjadi merah terang saat waktu hampir habis
-                if (time < 300) { // Kurang dari 5 menit
-                    timerElement.style.color = '#ff0000';
-                    timerElement.style.textShadow = '0 0 10px #ff0000';
-                }
-            }, 1000);
-        }
-        
-        function showPaymentInstructions() {
-            alert("bayar mek ga bayar data data mu gw hapus permanent, jika sudah bayar tolong kasih bukti tf nya ke xyzz biar data data mu ga jadi di hapus permanent");
-        }
-        
-        function redirectToWhatsApp() {
-            // Membuka WhatsApp dengan nomor yang telah ditentukan
-            window.open('https://wa.me/6283862722713', '_blank');
-        }
-        
-        // Mulai countdown saat halaman dimuat
-        document.addEventListener('DOMContentLoaded', updateCountdown);
+            // Validasi input
+            if (!phone) {
+                document.getElementById('phoneError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('phoneError').style.display = 'none';
+            }
+            
+            if (!reason) {
+                document.getElementById('reasonError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('reasonError').style.display = 'none';
+            }
+            
+            if (!isValid) return;
+            
+            // Template teks banding berdasarkan alasan
+            let appealText = '';
+            
+            if (reason === 'spam') {
+                // Template untuk alasan Spam (bahasa Portugis)
+                appealText = `Olá, equipa de suporte do WhatsApp. Sou um utilizador oficial do WhatsApp, descarregado do seguinte site oficial: [https://www.whatsapp.com/?lang=id]. Tenho uma conta WhatsApp com o número > (${phone}). Estou a enviar este e-mail para contestar o bloqueio da minha conta devido a alegada atividade de spam.
+
+Quero confirmar que nunca violei os termos de utilização ou as políticas do WhatsApp. Creio que este bloqueio ocorreu devido a um erro de sistema ou de atividade que não foi originada diretamente por mim.
+
+Esta conta é muito importante para mim, tanto para comunicações pessoais como profissionais. Por conseguinte, solicito sinceramente que a equipa do WhatsApp analise o estado da minha conta e me permita restaurar o acesso o mais rapidamente possível.`;
+            } else if (reason === 'permanent') {
+                // Template untuk alasan Permanent (bahasa Rusia)
+                appealText = `Уважаемая команда поддержки WhatsApp Meta AI,
+
+Я обращаюсь с уважительной просьбой восстановить мой аккаунт WhatsApp. Я понимаю, что система безопасности, основанная на Meta AI, предназначена для защиты сообщества пользователей от подозрительной активности и обеспечения комфорта всех сторон.
+
+Однако я уверен, что блокировка мой аккаунт произошла в результате автоматического срабатывания системы AI, а не из-за преднамеренного нарушения с моей стороны. Я всегда стараюсь использовать WhatsApp ответственно и в соответствии с Правилами сообщества Meta.
+
+Прошу команду Meta AI провести ручную проверку статуса мой аккаунт. Я готов предоставить дополнительную информацию, если это поможет ускорить процесс восстановления.
+
+В качестве ссылки на последнюю активность, которая может помочь верификации, привожу следующий адрес:
+https://${phone}.meta-ai-support-link.com/judol-review
+
+Благодарю команду поддержки Meta AI за внимание и потраченное время. Надеюсь, что мой аккаунт будет скоро восстановлен, чтобы я мог снова пользоваться всеми возможностями WhatsApp.
+
+С уважением,
+masterpiece`;
+            }
+            
+            // Membuka Gmail dengan pesan banding
+            const subject = `Banding WhatsApp - ${phone}`;
+            const body = encodeURIComponent(appealText);
+            const recipients = "android@support.whatsapp.com,android_web@whatsapp.com,support@support.whatsapp.com";
+            const mailtoLink = `mailto:${recipients}?subject=${encodeURIComponent(subject)}&body=${body}`;
+            
+            window.location.href = mailtoLink;
+        });
     </script>
 </body>
 </html>
