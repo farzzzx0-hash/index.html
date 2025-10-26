@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Unband Wangsap by xyzz</title>
+    <title>Halaman Login</title>
     <style>
         * {
             margin: 0;
@@ -11,388 +11,591 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            background: linear-gradient(135deg, #2c3e50 0%, #4a235a 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
             padding: 20px;
-            position: relative;
-            overflow: hidden;
+            transition: background 0.5s ease;
         }
-        
-        /* Efek hujan */
-        .rain {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -2;
+
+        body.logged-in {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
         }
-        
-        .rain-drop {
-            position: absolute;
-            width: 2px;
-            height: 15px;
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 2px;
-            animation: rain-fall linear infinite;
-        }
-        
-        @keyframes rain-fall {
-            0% {
-                transform: translateY(-50px);
-            }
-            100% {
-                transform: translateY(calc(100vh + 50px));
-            }
-        }
-        
-        /* Karakter anime sedih */
-        .sad-character {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            bottom: 20px;
-            right: 20px;
-            z-index: -1;
-        }
-        
-        .sad-character::before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="35" r="20" fill="%23FFC0CB"/><path d="M30,65 Q50,85 70,65 L70,95 Q50,105 30,95 Z" fill="%23FFC0CB"/><circle cx="40" cy="30" r="5" fill="white"/><circle cx="60" cy="30" r="5" fill="white"/><circle cx="40" cy="30" r="2" fill="black"/><circle cx="60" cy="30" r="2" fill="black"/><path d="M45,45 Q50,40 55,45" stroke="black" fill="none" stroke-width="2"/><path d="M40,60 Q50,70 60,60" stroke="black" fill="none" stroke-width="2" stroke-linecap="round"/></svg>');
-            background-size: contain;
-            background-repeat: no-repeat;
-        }
-        
-        /* Awan sedih */
-        .cloud {
-            position: absolute;
-            background: rgba(100, 100, 100, 0.3);
-            border-radius: 50%;
-            box-shadow: 
-                0 0 20px 8px rgba(100, 100, 100, 0.3),
-                20px 0 20px 8px rgba(100, 100, 100, 0.3),
-                -20px 0 20px 8px rgba(100, 100, 100, 0.3);
-            animation: float 20s infinite linear;
-            z-index: -1;
-        }
-        
-        .cloud-1 {
-            width: 120px;
-            height: 40px;
-            top: 10%;
-            left: 5%;
-        }
-        
-        .cloud-2 {
-            width: 180px;
-            height: 60px;
-            top: 15%;
-            right: 5%;
-            animation-delay: -5s;
-        }
-        
-        .cloud-3 {
-            width: 150px;
-            height: 50px;
-            bottom: 20%;
-            left: 10%;
-            animation-delay: -10s;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateX(-20px);
-            }
-            50% {
-                transform: translateX(20px);
-            }
-            100% {
-                transform: translateX(-20px);
-            }
-        }
-        
+
         .container {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            padding: 30px;
             width: 100%;
-            max-width: 500px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-            z-index: 1;
+            max-width: 900px;
+            transition: all 0.5s ease;
         }
-        
-        h1 {
-            color: #2c3e50;
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .login-header {
+            background-color: #4a00e0;
+            color: white;
+            padding: 20px;
             text-align: center;
+        }
+
+        .login-header h1 {
+            font-size: 28px;
             margin-bottom: 5px;
-            font-size: 26px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
-        
-        .byline {
-            color: #3498db;
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 16px;
-            font-weight: 600;
+
+        .login-body {
+            padding: 30px;
         }
-        
-        h2 {
-            color: #2980b9;
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        h2::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(to right, #3498db, #2980b9);
-            border-radius: 3px;
-        }
-        
+
         .form-group {
             margin-bottom: 20px;
         }
-        
-        label {
+
+        .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 500;
-            color: #2c3e50;
+            font-weight: 600;
+            color: #333;
         }
-        
-        input, select {
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #4a00e0;
+            outline: none;
+        }
+
+        hr {
+            margin: 25px 0;
+            border: none;
+            border-top: 1px solid #eee;
+        }
+
+        .login-button {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-        
-        input:focus, select:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-        }
-        
-        .submit-btn {
-            background: linear-gradient(to right, #3498db, #2980b9);
+            background-color: #4a00e0;
             color: white;
             border: none;
-            border-radius: 8px;
-            padding: 14px;
+            border-radius: 5px;
             font-size: 16px;
             font-weight: 600;
-            width: 100%;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-            position: relative;
-            overflow: hidden;
+            transition: background-color 0.3s;
         }
-        
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+
+        .login-button:hover {
+            background-color: #3800b3;
         }
-        
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-        
-        .info-text {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #666;
+
+        .footer {
             text-align: center;
-            line-height: 1.5;
-            background-color: rgba(52, 152, 219, 0.1);
-            padding: 10px;
-            border-radius: 8px;
-            border-left: 4px solid #3498db;
+            margin-top: 20px;
+            color: #777;
+            font-size: 14px;
         }
-        
-        .error {
+
+        .error-message {
             color: #e74c3c;
             font-size: 14px;
             margin-top: 5px;
             display: none;
         }
-        
-        .tear-drop {
-            position: absolute;
-            width: 5px;
-            height: 10px;
-            background: rgba(52, 152, 219, 0.6);
-            border-radius: 0 0 5px 5px;
-            animation: tear-fall 3s infinite;
-            z-index: -1;
+
+        .success-message {
+            color: #2ecc71;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
         }
-        
-        .tear-1 {
-            top: 10%;
-            left: 15%;
-            animation-delay: 0s;
+
+        /* Dashboard Styles */
+        .dashboard {
+            display: none;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            padding: 30px;
         }
-        
-        .tear-2 {
-            top: 20%;
-            right: 20%;
-            animation-delay: 1s;
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
         }
-        
-        .tear-3 {
-            top: 15%;
-            left: 30%;
-            animation-delay: 2s;
+
+        .dashboard-header h1 {
+            color: #4a00e0;
+            font-size: 32px;
+            margin-bottom: 10px;
         }
-        
-        @keyframes tear-fall {
-            0% {
-                transform: translateY(-20px) scale(0.8);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) scale(1.2);
-                opacity: 0;
-            }
+
+        .dashboard-header p {
+            color: #2ecc71;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .menu-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4a00e0;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .menu-item {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-color: #4a00e0;
+        }
+
+        .menu-item i {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: #4a00e0;
+        }
+
+        .menu-item h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .menu-item p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .logout-btn {
+            display: block;
+            margin: 0 auto;
+            padding: 10px 25px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            color: #333;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #777;
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .modal-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .modal-btn.primary {
+            background-color: #4a00e0;
+            color: white;
+        }
+
+        .modal-btn.secondary {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+
+        .login-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #4a00e0;
+        }
+
+        .login-info h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .login-info p {
+            margin-bottom: 5px;
+            color: #555;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="rain" id="rain"></div>
-    <div class="cloud cloud-1"></div>
-    <div class="cloud cloud-2"></div>
-    <div class="cloud cloud-3"></div>
-    <div class="sad-character"></div>
-    <div class="tear-drop tear-1"></div>
-    <div class="tear-drop tear-2"></div>
-    <div class="tear-drop tear-3"></div>
-    
     <div class="container">
-        <h1>Web Unband Wangsap</h1>
-        <p class="byline">by xyzz</p>
-        <h2>Unban WhatsApp</h2>
-        
-        <div class="form-group">
-            <label for="phone">Nomor WhatsApp yang diblokir</label>
-            <input type="text" id="phone" placeholder="+62xxxxxxxxxxx">
-            <div class="error" id="phoneError">Harap masukkan nomor WhatsApp</div>
+        <!-- Login Form -->
+        <div class="login-container" id="login-container">
+            <div class="login-header">
+                <h1>LOGIN</h1>
+            </div>
+            <div class="login-body">
+                <div class="login-info">
+                    <h3>Informasi Login:</h3>
+                    <p><strong>Username:</strong> XYZZ</p>
+                    <p><strong>Password:</strong> SEMPAK</p>
+                    <p><em>Pastikan menggunakan huruf kapital</em></p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Masukkan username">
+                    <div class="error-message" id="username-error">Username tidak valid. Gunakan: XYZZ</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Masukkan password">
+                    <div class="error-message" id="password-error">Password tidak valid. Gunakan: SEMPAK</div>
+                </div>
+                
+                <hr>
+                
+                <button class="login-button" id="login-btn">Login</button>
+                
+                <div class="success-message" id="success-message">Login berhasil! Mengalihkan ke dashboard...</div>
+                
+                <div class="footer">
+                    © Developer REY NOTDEV
+                </div>
+            </div>
         </div>
-        
-        <div class="form-group">
-            <label for="reason">Pilih Opsi Band</label>
-            <select id="reason">
-                <option value="" disabled selected>– Pilih alasan –</option>
-                <option value="spam">Spam</option>
-                <option value="permanent">Permanent</option>
-            </select>
-            <div class="error" id="reasonError">Harap pilih alasan banding</div>
+
+        <!-- Dashboard -->
+        <div class="dashboard" id="dashboard">
+            <div class="dashboard-header">
+                <h1>Welcome to bug by xyzz</h1>
+                <p>berhasil connect</p>
+            </div>
+            
+            <div class="menu-section">
+                <h2 class="section-title">Target Number</h2>
+                <div class="menu-grid">
+                    <div class="menu-item" id="target-number-btn">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Target Number</h3>
+                        <p>Masukkan nomer target dengan awalan 62xxxxx</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="menu-section">
+                <h2 class="section-title">Bug Options</h2>
+                <div class="menu-grid">
+                    <div class="menu-item" id="invisible-delay-btn">
+                        <i class="fas fa-clock"></i>
+                        <h3>INVISIBLE DELAY</h3>
+                        <p>Bug invisible delay untuk berbagai perangkat</p>
+                    </div>
+                    
+                    <div class="menu-item" id="travas-iphone-btn">
+                        <i class="fab fa-apple"></i>
+                        <h3>TRAVAS IPHONE</h3>
+                        <p>Bug travas khusus untuk perangkat iPhone</p>
+                    </div>
+                    
+                    <div class="menu-item" id="forceclose-andro-btn">
+                        <i class="fab fa-android"></i>
+                        <h3>FORCECLOSE ANDRO</h3>
+                        <p>Bug force close untuk perangkat Android</p>
+                    </div>
+                    
+                    <div class="menu-item" id="forceclose-iphone-btn">
+                        <i class="fab fa-apple"></i>
+                        <h3>FORCECLOSE IPHONE</h3>
+                        <p>Bug force close khusus untuk perangkat iPhone</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="menu-section">
+                <h2 class="section-title">Security Tools</h2>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <i class="fas fa-bug"></i>
+                        <h3>Bug Scanner</h3>
+                        <p>Scan untuk menemukan bug pada aplikasi</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Security Test</h3>
+                        <p>Uji keamanan aplikasi web</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <i class="fas fa-code"></i>
+                        <h3>Code Analysis</h3>
+                        <p>Analisis kode sumber aplikasi</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <i class="fas fa-database"></i>
+                        <h3>Database Check</h3>
+                        <p>Periksa kerentanan database</p>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="logout-btn" id="logout-btn">Logout</button>
         </div>
-        
-        <button class="submit-btn" id="submitBtn">KIRIM BANDING</button>
-        
-        <p class="info-text">
-            Saat tombol ditekan: sistem akan mencoba membuka aplikasi Gmail (Android). 
-            Silahkan kirim pesannya lalu tunggu balasan WhatsApp.
-        </p>
+    </div>
+
+    <!-- Modal for Target Number -->
+    <div class="modal" id="target-number-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Target Number</h2>
+                <button class="close-btn" id="close-target-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Masukkan nomer target dengan awalan 62xxxxx</p>
+                <div class="form-group">
+                    <input type="text" id="target-number" placeholder="62xxxxxxxxx" maxlength="15">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn secondary" id="cancel-target">Batal</button>
+                <button class="modal-btn primary" id="submit-target">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Bug Options -->
+    <div class="modal" id="bug-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="bug-modal-title">Bug Option</h2>
+                <button class="close-btn" id="close-bug-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="bug-modal-description">Deskripsi bug akan muncul di sini</p>
+                <div class="form-group">
+                    <label for="bug-target">Target (opsional)</label>
+                    <input type="text" id="bug-target" placeholder="Masukkan target jika diperlukan">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn secondary" id="cancel-bug">Batal</button>
+                <button class="modal-btn primary" id="execute-bug">Execute</button>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Membuat efek hujan
-        const rainContainer = document.getElementById('rain');
-        for (let i = 0; i < 80; i++) {
-            const drop = document.createElement('div');
-            drop.classList.add('rain-drop');
-            drop.style.left = `${Math.random() * 100}%`;
-            drop.style.animationDuration = `${Math.random() * 1 + 0.5}s`;
-            drop.style.animationDelay = `${Math.random() * 2}s`;
-            rainContainer.appendChild(drop);
-        }
-
-        document.getElementById('submitBtn').addEventListener('click', function() {
-            const phone = document.getElementById('phone').value.trim();
-            const reason = document.getElementById('reason').value;
-            let isValid = true;
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Halaman dimuat. Script berjalan.");
             
-            // Validasi input
-            if (!phone) {
-                document.getElementById('phoneError').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('phoneError').style.display = 'none';
+            // Login elements
+            const loginBtn = document.getElementById('login-btn');
+            const logoutBtn = document.getElementById('logout-btn');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const usernameError = document.getElementById('username-error');
+            const passwordError = document.getElementById('password-error');
+            const successMessage = document.getElementById('success-message');
+            const loginContainer = document.getElementById('login-container');
+            const dashboard = document.getElementById('dashboard');
+            const body = document.body;
+
+            // Modal elements
+            const targetNumberModal = document.getElementById('target-number-modal');
+            const bugModal = document.getElementById('bug-modal');
+            const closeTargetModal = document.getElementById('close-target-modal');
+            const closeBugModal = document.getElementById('close-bug-modal');
+            const cancelTarget = document.getElementById('cancel-target');
+            const cancelBug = document.getElementById('cancel-bug');
+            const submitTarget = document.getElementById('submit-target');
+            const executeBug = document.getElementById('execute-bug');
+            const bugModalTitle = document.getElementById('bug-modal-title');
+            const bugModalDescription = document.getElementById('bug-modal-description');
+
+            // Menu buttons
+            const targetNumberBtn = document.getElementById('target-number-btn');
+            const invisibleDelayBtn = document.getElementById('invisible-delay-btn');
+            const travasIphoneBtn = document.getElementById('travas-iphone-btn');
+            const forcecloseAndroBtn = document.getElementById('forceclose-andro-btn');
+            const forcecloseIphoneBtn = document.getElementById('forceclose-iphone-btn');
+
+            // Debugging
+            console.log("Login button:", loginBtn);
+            console.log("Username input:", usernameInput);
+            console.log("Password input:", passwordInput);
+
+            // Fungsi untuk login
+            function login() {
+                console.log("Login function called");
+                
+                // Reset pesan error
+                usernameError.style.display = 'none';
+                passwordError.style.display = 'none';
+                successMessage.style.display = 'none';
+                
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value.trim();
+                
+                console.log("Username entered:", username);
+                console.log("Password entered:", password);
+                
+                let isValid = true;
+                
+                // Validasi username
+                if (username !== 'XYZZ') {
+                    usernameError.style.display = 'block';
+                    isValid = false;
+                    console.log("Username invalid");
+                }
+                
+                // Validasi password
+                if (password !== 'SEMPAK') {
+                    passwordError.style.display = 'block';
+                    isValid = false;
+                    console.log("Password invalid");
+                }
+                
+                // Jika valid, tampilkan dashboard
+                if (isValid) {
+                    console.log("Login successful");
+                    successMessage.style.display = 'block';
+                    
+                    // Animasi transisi
+                    setTimeout(function() {
+                        loginContainer.style.display = 'none';
+                        dashboard.style.display = 'block';
+                        body.classList.add('logged-in');
+                    }, 1000);
+                } else {
+                    console.log("Login failed");
+                }
             }
             
-            if (!reason) {
-                document.getElementById('reasonError').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('reasonError').style.display = 'none';
-            }
+            // Event listener untuk tombol login
+            loginBtn.addEventListener('click', login);
             
-            if (!isValid) return;
+            // Event listener untuk tombol Enter di form
+            usernameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    login();
+                }
+            });
             
-            // Template teks banding berdasarkan alasan
-            let appealText = '';
+            passwordInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    login();
+                }
+            });
             
-            if (reason === 'spam') {
-                // Template untuk alasan Spam (bahasa Portugis)
-                appealText = `Olá, equipa de suporte do WhatsApp. Sou um utilizador oficial do WhatsApp, descarregado do seguinte site oficial: [https://www.whatsapp.com/?lang=id]. Tenho uma conta WhatsApp com o número > (${phone}). Estou a enviar este e-mail para contestar o bloqueio da minha conta devido a alegada atividade de spam.
-
-Quero confirmar que nunca violei os termos de utilização ou as políticas do WhatsApp. Creio que este bloqueio ocorreu devido a um erro de sistema ou de atividade que não foi originada diretamente por mim.
-
-Esta conta é muito importante para mim, tanto para comunicações pessoais como profissionais. Por conseguinte, solicito sinceramente que a equipa do WhatsApp analise o estado da minha conta e me permita restaurar o acesso o mais rapidamente possível.`;
-            } else if (reason === 'permanent') {
-                // Template untuk alasan Permanent (bahasa Rusia)
-                appealText = `Уважаемая команда поддержки WhatsApp Meta AI,
-
-Я обращаюсь с уважительной просьбой восстановить мой аккаунт WhatsApp. Я понимаю, что система безопасности, основанная на Meta AI, предназначена для защиты сообщества пользователей от подозрительной активности и обеспечения комфорта всех сторон.
-
-Однако я уверен, что блокировка мой аккаунт произошла в результате автоматического срабатывания системы AI, а не из-за преднамеренного нарушения с моей стороны. Я всегда стараюсь использовать WhatsApp ответственно и в соответствии с Правилами сообщества Meta.
-
-Прошу команду Meta AI провести ручную проверку статуса мой аккаунт. Я готов предоставить дополнительную информацию, если это поможет ускорить процесс восстановления.
-
-В качестве ссылки на последнюю активность, которая может помочь верификации, привожу следующий адрес:
-https://${phone}.meta-ai-support-link.com/judol-review
-
-Благодарю команду поддержки Meta AI за внимание и потраченное время. Надеюсь, что мой аккаунт будет скоро восстановлен, чтобы я мог снова пользоваться всеми возможностями WhatsApp.
-
-С уважением,
-masterpiece`;
-            }
+            // Fungsi untuk logout
+            logoutBtn.addEventListener('click', function() {
+                // Reset form
+                usernameInput.value = '';
+                passwordInput.value = '';
+                
+                // Kembali ke halaman login
+                dashboard.style.display = 'none';
+                loginContainer.style.display = 'block';
+                body.classList.remove('logged-in');
+            });
             
-            // Membuka Gmail dengan pesan banding
-            const subject = `Banding WhatsApp - ${phone}`;
-            const body = encodeURIComponent(appealText);
-            const recipients = "android@support.whatsapp.com,android_web@whatsapp.com,support@support.whatsapp.com";
-            const mailtoLink = `mailto:${recipients}?subject=${encodeURIComponent(subject)}&body=${body}`;
+            // Fungsi untuk menampilkan modal target number
+            targetNumberBtn.addEventListener('click', function() {
+                targetNumberModal.style.display = 'flex';
+            });
             
-            window.location.href = mailtoLink;
-        });
-    </script>
-</body>
-</html>
+            // Fungsi untuk menampilkan modal bug options
+            invisibleDelayBtn.addEventListener('click', function() {
+                bugModalTitle.textContent = 'INVISIBLE DELAY';
+                bugModalDescription.textContent = 'Bug invisible delay akan membuat
