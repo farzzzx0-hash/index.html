@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DITZY STORE - Jualan Hosting Cyber Berkualitas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        
+        /* Banner Nama Toko di Paling Atas */
+        .store-banner {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            color: white;
+            text-align: center;
+            padding: 12px 0;
+            font-weight: 800;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1001;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .store-banner span {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-left: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* Navigasi Menu */
+        .navbar {
+            position: fixed;
+            top: 52px; /* Menyesuaikan dengan tinggi banner */
+            width: 100%;
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 1px solid #334155;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .nav-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-logo i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-menu a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .nav-menu a:hover {
+            color: #3b82f6;
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+        
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+        
+        .nav-menu a:hover::after {
+            width: 80%;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .nav-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-btn.telegram {
+            background-color: #3b82f6;
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .nav-btn.telegram:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(59, 130, 246, 0.5);
+        }
+        
+        .nav-btn.products {
+            background-color: transparent;
+            color: #3b82f6;
+            border: 2px solid #3b82f6;
+        }
+        
+        .nav-btn.products:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: #3b82f6;
+            margin: 3px 0;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            margin-top: 70px;
+            border-radius: 0 0 30px 30px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .store-hero-title {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #f8fafc;
+        }
+        
+        .store-hero-title .store-name {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .hero-title {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-btn {
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .hero-btn.primary {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            color: white;
+            box-shadow: 0 5px 20px rgba(59, 130, 246, 0.4);
+        }
+        
+        .hero-btn.primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.6);
+        }
+        
+        .hero-btn.secondary {
+            background-color: transparent;
+            color: #3b82f6;
+            border: 2px solid #3b82f6;
+        }
+        
+        .hero-btn.secondary:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 80px 0;
+        }
+        
+        .product-card {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #334155;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+        }
+        
+        .product-img-container {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 2px solid #3b82f6;
+            background-color: #1e293b;
+        }
+        
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+        
+        .product-content {
+            padding: 25px;
+        }
+        
+        .product-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #f8fafc;
+        }
+        
+        .product-desc {
+            color: #94a3b8;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        
+        .product-features {
+            margin-bottom: 25px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #cbd5e1;
+        }
+        
+        .feature i {
+            color: #3b82f6;
+            margin-right: 10px;
+            min-width: 20px;
+        }
+        
+        .product-price {
+            font-size: 1.8rem;
+            color: #3b82f6;
+            font-weight: 700;
+            margin-top: 15px;
+            text-align: center;
+            padding: 10px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 8px;
+        }
+        
+        .contact-section {
+            text-align: center;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 60px 20px;
+            border-radius: 20px;
+            border: 1px solid #334155;
+            margin: 80px 0 40px;
+        }
+        
+        .contact-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #f8fafc;
+        }
+        
+        .contact-desc {
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.2rem;
+        }
+        
+        .telegram-btn-large {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        .telegram-btn-large:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.6);
+        }
+        
+        .telegram-btn-large i {
+            font-size: 1.8rem;
+            margin-right: 15px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            color: #64748b;
+            border-top: 1px solid #334155;
+            font-size: 0.9rem;
+        }
+        
+        .footer-store-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .highlight {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 50px;
+            color: #f8fafc;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 2px;
+        }
+        
+        @media (max-width: 992px) {
+            .nav-menu {
+                position: fixed;
+                top: 122px; /* Menyesuaikan dengan tinggi banner + navbar */
+                right: -100%;
+                flex-direction: column;
+                background-color: rgba(15, 23, 42, 0.98);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.5);
+                padding: 20px 0;
+                border-top: 1px solid #334155;
+                z-index: 999;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+            
+            .store-hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .store-banner {
+                font-size: 1.1rem;
+                padding: 10px 0;
+            }
+            
+            .store-banner span {
+                font-size: 0.8rem;
+                margin-left: 5px;
+            }
+            
+            .navbar {
+                top: 48px;
+            }
+            
+            .store-hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero {
+                padding: 150px 0 60px;
+            }
+            
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .nav-buttons {
+                display: none;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .contact-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Banner Nama Toko di Paling Atas -->
+    <div class="store-banner">
+        🚀 DITZY STORE <span>HOSTING CYBER TERBAIK</span>
+    </div>
+    
+    <!-- Navigasi Menu -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <i class="fas fa-store"></i> DITZY STORE
+            </a>
+            
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Produk</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+            
+            <div class="nav-buttons">
+                <a href="#products" class="nav-btn products">
+                    <i class="fas fa-box"></i> Produk
+                </a>
+                <a href="http://t.me/ditzy123" target="_blank" class="nav-btn telegram">
+                    <i class="fab fa-telegram"></i> Telegram
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="store-hero-title">
+                Selamat Datang di <span class="store-name">DITZY STORE</span>
+            </h1>
+            <h2 class="hero-title">Solusi Hosting Cyber Terbaik</h2>
+            <p class="hero-subtitle">Tingkatkan performa digital Anda dengan hosting berkualitas tinggi dari DITZY STORE. Dapatkan kecepatan, keamanan, dan dukungan 24/7 untuk semua kebutuhan cyber Anda.</p>
+            <div class="hero-buttons">
+                <a href="#products" class="hero-btn primary">
+                    <i class="fas fa-shopping-cart"></i> Lihat Produk
+                </a>
+                <a href="http://t.me/ditzy123" target="_blank" class="hero-btn secondary">
+                    <i class="fab fa-telegram"></i> Konsultasi via Telegram
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Products Section -->
+    <main class="container" id="products">
+        <h2 class="section-title">Produk Unggulan Kami</h2>
+        
+        <div class="products-grid">
+            <!-- Produk 1: VPSS OCEAN 4-16 GB -->
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="https://files.catbox.moe/duss3b.jpg" 
+                         alt="VPSS OCEAN 4-16 GB" 
+                         class="product-img"
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80';">
+                </div>
+                <div class="product-content">
+                    <h2 class="product-title">VPSS OCEAN 4-16 GB</h2>
+                    <p class="product-desc">VPS Server dengan performa tinggi untuk kebutuhan server yang berat dan stabil. Cocok untuk hosting website, aplikasi, dan game server.</p>
+                    
+                    <div class="product-features">
+                        <div class="feature">
+                            <i class="fas fa-microchip"></i>
+                            <span>RAM: <span class="highlight">4GB - 16GB</span> DDR4</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-hdd"></i>
+                            <span>Storage: <span class="highlight">SSD NVMe 50GB - 200GB</span></span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-bolt"></i>
+                            <span>CPU: <span class="highlight">4 - 16 Cores</span> High Performance</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Bandwidth: <span class="highlight">Unlimited</span> 1Gbps Port</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>DDoS Protection: <span class="highlight">Tingkat Enterprise</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="product-price">
+                          <div class="product-price">
+                        Mulai dari Rp 15.000 - 40.000
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Produk 2: PANEL PTERODACYL 1-UNLI -->
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="https://files.catbox.moe/m8f72v.jpg" 
+                         alt="PANEL PTERODACTYL 1-UNLI" 
+                         class="product-img"
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80';">
+                </div>
+                <div class="product-content">
+                    <h2 class="product-title">PANEL PTERODACTYL 1-UNLI</h2>
+                    <p class="product-desc">Panel pterodactyl cocok untuk hostinger atau belajar memasang bot whatsapp maupun telegram.</p>
+                    
+                    <div class="product-features">
+                        <div class="feature">
+                            <i class="fas fa-gamepad"></i>
+                            <span>Server: <span class="highlight">Unlimited Game Servers</span></span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-users"></i>
+                            <span>Users: <span class="highlight">Unlimited Users</span> & Subusers</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-server"></i>
+                            <span>Nodes: <span class="highlight">1 hingga Unlimited Nodes</span></span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-cogs"></i>
+                            <span>Customization: <span class="highlight">Full Control</span> & Custom Themes</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-headset"></i>
+                            <span>Support: <span class="highlight">24/7 Priority Support</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="product-price">
+                        Mulai dari Rp 5.000 unlimited
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Produk 3: NOKOS ALL NEGARA -->
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="https://files.catbox.moe/0ss9nw.jpg" 
+                         alt="NOKOS ALL NEGARA" 
+                         class="product-img"
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80';">
+                </div>
+                <div class="product-content">
+                    <h2 class="product-title">NOKOS ALL NEGARA</h2>
+                    <p class="product-desc">Nomer whatsapp dari all negara cocok untuk sender atau jualan lain nya.</p>
+                    
+                    <div class="product-features">
+                        <div class="feature">
+                            <i class="fas fa-globe-americas"></i>
+                            <span>Coverage: <span class="highlight">30+ Negara</span> di seluruh dunia</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-wifi"></i>
+                            <span>Connection: <span class="highlight">Stable & High-Speed</span></span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-user-secret"></i>
+                            <span>Privacy: <span class="highlight">Full Anonymity</span> & No Logs</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>Uptime: <span class="highlight">99.9% Guarantee</span></span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>Compatibility: <span class="highlight">All Devices</span> & Platforms</span>
+                        </div>
+                    </div>
+                    
+                    <div class="product-price">
+                        Mulai dari Rp 5.000 - 40.000
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Contact Section -->
+    <div class="container" id="contact">
+        <div class="contact-section">
+            <h2 class="contact-title">Siap Meningkatkan Performa Digital Anda?</h2>
+            <p class="contact-desc">Hubungi kami sekarang via Telegram untuk konsultasi gratis, pemesanan produk, atau informasi lebih lanjut. Tim support kami siap membantu 24/7.</p>
+            <a href="http://t.me/ditzy123" target="_blank" class="telegram-btn-large">
+                <i class="fab fa-telegram"></i> Hubungi @ditzy123 di Telegram
+            </a>
+            <p style="margin-top: 25px; color: #94a3b8; font-size: 1.1rem;">
+                Klik tombol di atas atau salin username: <strong style="color: #3b82f6;">@ditzy123</strong>
+            </p>
+            <p style="margin-top: 15px; color: #94a3b8; font-size: 1rem;">
+                <i class="fas fa-clock"></i> Respon cepat dalam 5-15 menit
+            </p>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-store-name">DITZY STORE</div>
+            <p>Solusi hosting cyber terbaik untuk semua kebutuhan digital Anda</p>
+            <p style="margin-top: 15px; font-size: 0.8rem;">
+                &copy; 2026 DITZY STORE. Semua hak dilindungi.
+            </p>
+            <p style="margin-top: 15px;">
+                <a href="http://t.me/ditzy123" target="_blank" style="color: #3b82f6; text-decoration: none; font-weight: 600;">
+                    <i class="fab fa-telegram"></i> Telegram: @ditzy123
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if(this.getAttribute('href') === '#') return;
+                
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Preload images for better performance
+        window.addEventListener('load', function() {
+            const images = [
+                'https://files.catbox.moe/duss3b.jpg',
+                'https://files.catbox.moe/m8f72v.jpg',
+                'https://files.catbox.moe/0ss9nw.jpg'
+            ];
+            
+            images.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+        });
+        
+        // Product card hover effect enhancement
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const hue = Math.floor(Math.random() * 60) + 200;
+                this.style.borderColor = `hsl(${hue}, 80%, 60%)`;
+                this.style.boxShadow = `0 15px 30px hsla(${hue}, 80%, 60%, 0.3)`;
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.borderColor = '#334155';
+                this.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.3)';
+            });
+        });
+        
+        // Button animation effect
+        document.querySelectorAll('.hero-btn, .nav-btn, .telegram-btn-large').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = this.classList.contains('primary') 
+                    ? 'translateY(-5px) scale(1.05)' 
+                    : 'translateY(-3px)';
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+        
+        // Add loading animation for images
+        document.querySelectorAll('.product-img').forEach(img => {
+            img.addEventListener('load', function() {
+                this.style.opacity = '1';
+                this.parentElement.style.background = 'transparent';
+            });
+            
+            img.addEventListener('error', function() {
+                console.log('Gagal memuat gambar: ' + this.alt);
+            });
+        });
+        
+        // Banner animation
+        const banner = document.querySelector('.store-banner');
+        let colors = ['#3b82f6', '#8b5cf6', '#ec4899', '#10b981'];
+        let colorIndex = 0;
+        
+        function changeBannerColor() {
+            banner.style.background = `linear-gradient(90deg, ${colors[colorIndex]}, ${colors[(colorIndex + 1) % colors.length]})`;
+            colorIndex = (colorIndex + 1) % colors.length;
+        }
+        
+        // Change banner color every 5 seconds
+        setInterval(changeBannerColor, 5000);
+    </script>
+</body>
+</html>
+```
+                       
